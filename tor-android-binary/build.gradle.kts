@@ -14,15 +14,20 @@ fun getVersionNameFromGitTag(): Provider<String> = providers.exec {
     commandLine("git", "describe", "--tags", "--always")
 }.standardOutput.asText.map { it.trim() }
 
-configure<LibraryExtension> {
+configure {
     namespace = "org.torproject.jni"
-    compileSdk {
-        version = release(33) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 34
     defaultConfig {
         minSdk = 24
+        targetSdk = 34
+        // ...
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    // ...
+}
 
         // Replace with actual values or move to gradle.properties or version catalog
         buildConfigField("int", "VERSION_CODE", rootProject.extra["versionCode"].toString())
