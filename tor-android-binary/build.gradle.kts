@@ -20,7 +20,6 @@ extensions.configure<LibraryExtension> {
     compileSdk = 34
     defaultConfig {
         minSdk = 24
-        targetSdk = 34
         buildConfigField("int", "VERSION_CODE", rootProject.extra["versionCode"].toString())
         buildConfigField("String", "VERSION_NAME", "\"${rootProject.extra["versionName"]}\"")
     }
