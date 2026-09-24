@@ -20,16 +20,6 @@ configure {
     defaultConfig {
         minSdk = 24
         targetSdk = 34
-        // ...
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    // ...
-}
-
-        // Replace with actual values or move to gradle.properties or version catalog
         buildConfigField("int", "VERSION_CODE", rootProject.extra["versionCode"].toString())
         buildConfigField("String", "VERSION_NAME", "\"${rootProject.extra["versionName"]}\"")
     }
@@ -52,8 +42,8 @@ configure {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24
-        targetCompatibility = JavaVersion.VERSION_24
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
