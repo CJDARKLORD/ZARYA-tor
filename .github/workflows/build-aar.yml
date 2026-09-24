@@ -20,11 +20,11 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install NDK 26.1.10909125
+    - name: Install NDK 28.1.13356709
       run: |
         yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;26.1.10909125"
-        echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/26.1.10909125" >> $GITHUB_ENV
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;28.1.13356709"
+        echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/28.1.13356709" >> $GITHUB_ENV
 
     - name: Install build dependencies
       run: |
@@ -44,7 +44,7 @@ jobs:
 
     - name: Build native libraries and AAR
       run: |
-        export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/26.1.10909125
+        export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/28.1.13356709
         ./tor-droid-make.sh build -b release
 
     - name: Locate AAR
