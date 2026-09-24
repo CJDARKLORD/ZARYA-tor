@@ -1,7 +1,7 @@
 name: Build tor-android AAR
 
 on:
-  workflow_dispatch: # Позволяет запускать сборку вручную из вкладки Actions
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        submodules: 'recursive' # Важно для подмодулей (например, hev-socks5-tunnel)[reference:2]
+        submodules: 'recursive'
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -25,17 +25,16 @@ jobs:
     - name: Setup Android NDK
       uses: android-actions/setup-android@v3
       with:
-        ndk-version: '26.1.10909125' # Указываем ту же версию, что и в вашем проекте
+        ndk-version: '26.1.10909125'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
 
     - name: Build AAR
-      run: |
-        chmod +x ./gradlew
-        ./gradlew :tor-android:assembleRelease
-      # ВАЖНО: Перед сборкой нужно отредактировать build.gradle в форке
-      # (см. пункт 3 ниже)
+      run: ./gradlew :tor-android-binary:assembleRelease
 
-    - name: Upload AAR
+    - name: Upload AAR artifact
       uses: actions/upload-artifact@v4
       with:
         name: tor-android-aar
-        path: tor-android/build/outputs/aar/*.aar # Путь к артефакту может отличаться
+        path: tor-android-binary/build/outputs/aar/*.aar
