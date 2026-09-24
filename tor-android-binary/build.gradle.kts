@@ -1,5 +1,4 @@
 import com.android.build.api.dsl.LibraryExtension
-import org.gradle.kotlin.dsl.configure
 
 plugins {
     alias(libs.plugins.android.library)
@@ -18,6 +17,7 @@ fun getVersionNameFromGitTag(): Provider<String> = providers.exec {
 extensions.configure<LibraryExtension> {
     namespace = "org.torproject.jni"
     compileSdk = 34
+
     defaultConfig {
         minSdk = 24
         buildConfigField("int", "VERSION_CODE", rootProject.extra["versionCode"].toString())
@@ -48,6 +48,16 @@ extensions.configure<LibraryExtension> {
 
     buildFeatures {
         buildConfig = true
+    }
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
